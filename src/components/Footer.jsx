@@ -1,17 +1,26 @@
+import InstagramIcon from "@mui/icons-material/Instagram";
+import "../assets/css/Footer.css";
 
-export default function Footer() {
+// Son component
+const Footer = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <a href="https://www.linkedin.com/in/juan-manuel-lopez-lafuente-073a8190/">Linkedin</a>
-        </li>
-        <li>
-          <a href="https://github.com/jlopezlafu">Github</a>
-        </li>
-        <br />
-        <p>Tienda Ascenso 2022</p>
-      </ul>
+    <div className="footer-container">
+      <div className="instagram-icon">
+        <a href="https://www.instagram.com/">
+          <InstagramIcon
+            variant="outlinedSizeSmall"
+            color="inherit"
+            fullWidth={false}
+          />
+        </a>
+      </div>
+      <div>
+        <div className="copyright-text">
+          <p>Tienda Ascenso 2022. Todos los derechos reservados</p>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Footer;

@@ -1,0 +1,12 @@
+.btn-logo {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+}

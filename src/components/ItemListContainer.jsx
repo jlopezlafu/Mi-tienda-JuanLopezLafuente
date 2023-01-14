@@ -1,4 +1,12 @@
-import "./ItemListContainer.css";
-export default function ItemListContainer({ greeting }) {
-  return <div className="saludo">{greeting}</div>;
-}
+import React from "react";
+import ItemList from "./ItemList";
+
+const ItemListContainer = () => {
+  return (
+    <div className="ItemList-container">
+      <ItemList />
+    </div>
+  );
+};
+
+export default ItemListContainer;

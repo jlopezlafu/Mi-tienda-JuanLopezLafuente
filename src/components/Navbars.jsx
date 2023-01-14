@@ -1,5 +1,4 @@
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import MenuIcon from "@mui/icons-material/Menu";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,17 +9,20 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget";
+import Logo from "./Logo";
 
 const pages = [
   { label: "Home", link: "/" },
-  { label: "Productos", link: "/cart" },
-  { label: "Contacto", link: "/contacto" },
+  { label: "Nacional B", link: "/category/Nacional" },
+  { label: "Primera B Metropolitana", link: "/category/Metropolitana" },
+  { label: "Checkout", link: "/checkout" },
+  { label: "Contact", link: "/contact" },
 ];
 
-export default function Navbar() {
+const Navbars = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -30,12 +32,11 @@ export default function Navbar() {
     setAnchorElNav(null);
   };
 
-
   return (
-    <AppBar position="static">
+    <AppBar sx={{ backgroundColor: "#4169e1" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <SportsSoccerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Logo />
           <Typography
             variant="h6"
             noWrap
@@ -44,14 +45,14 @@ export default function Navbar() {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "roboto",
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".2rem",
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            TIENDA ASCENSO ARGENTINO
+            TIENDA ASCENSO
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -63,7 +64,7 @@ export default function Navbar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <ClearAllIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -92,7 +93,7 @@ export default function Navbar() {
               ))}
             </Menu>
           </Box>
-          <SportsSoccerIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -102,23 +103,28 @@ export default function Navbar() {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "roboto",
+              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            TIENDA ASCENSO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page.label}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  color: "#003865",
+                  my: 2,
+                  display: "block",
+                }}
               >
-                <a href={page.link}>{page.label}</a>
+                {" "}
+                <Link to={page.link}>{page.label}</Link>
               </Button>
             ))}
           </Box>
@@ -130,4 +136,6 @@ export default function Navbar() {
       </Container>
     </AppBar>
   );
-}
+};
+
+export default Navbars;

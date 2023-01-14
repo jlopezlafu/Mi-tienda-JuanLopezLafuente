@@ -1,10 +1,21 @@
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { Button } from "@mui/material";
 
-export default function CartWidget() {
+// Son component
+const CartWidget = () => {
   return (
-    <>
-    <ShoppingCartIcon/>
-    <h1>1</h1>
-    </>
-    );
-}
+    <div>
+      <Button
+        variant="outlinedSizeSmall"
+        color="primary"
+        fullWidth={false}
+        startIcon={<ShoppingCartOutlinedIcon />}
+      >
+        {" "}
+        0
+      </Button>
+    </div>
+  );
+};
+
+export default CartWidget;
