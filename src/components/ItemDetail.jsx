@@ -1,48 +1,50 @@
-import { Button } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import React, { useContext } from "react";
 import "../assets/css/index.css";
-import ItemCounter from "./ItemCounter";
-import "../assets/css/ItemCounter.css";
+import "../assets/css/ItemCount.css";
+import { generalContext } from "../components/CartContext";
+import ItemCount from "./ItemCount";
 
-const ItemDetail = ({ productos }) => {
-  const AddCart = (quantity) => {
-    alert("Usted a agregado " + quantity + " items al carrito");
+const ItemDetail = ({ products }) => {
+  const { addItem } = useContext(generalContext);
+
+  const onAddToCart = (quantity) => {
+    addItem(products, quantity);
   };
+
   return (
-    <div className="itemdetail-container">
-      {productos.id ? (
-        <div className="itemdetail2-container" key={productos.id}>
-          <img className="images" src={productos.pictureURL} alt="product" />
-          <h2>{productos.title}</h2>
-          <p>Size: {productos.size}</p>
-          <p>Color: {productos.color}</p>
-          <p>Price: {productos.price}</p>
-          <div className="itembox1-details">
-            <div className="itemcount-details">
-              <ItemCounter initial={0} stock={10} AddCart={AddCart} />
-            </div>
-            <Link to="/checkout">
-              <Button
-                sx={{
-                  backgroundColor: "#000",
-                  borderRadius: 2,
-                  "&:hover": {
-                    backgroundColor: "inherit",
-                    color: "#000",
-                  },
-                }}
-                variant="contained"
-              >
-                COMPRAR
-              </Button>
-            </Link>
-          </div>
-        </div>
+    <Box sx={{ backgroundColor: "#ffffff" }} className="detailContainer">
+      {products.id ? (
+        <Box
+          sx={{ backgroundColor: "#ffffff" }}
+          className="detailCont"
+          key={products.id}
+        >
+          <img
+            style={{ height: "400px", marginTop: 10 }}
+            src={products.img}
+            alt="product.name"
+          ></img>
+          <Typography sx={{ color: "#0A2647" }} variant="h5">
+            {products.title}
+          </Typography>
+          <Typography sx={{ color: "#0A2647" }}>
+            Stock: {products.stock}
+          </Typography>
+          <Typography sx={{ color: "#0A2647" }}>
+            Precio: {"Pesos " + products.price}
+          </Typography>
+          <Box className="box">
+            <Box className="box2">
+              <ItemCount initial={0} stock={10} onAddToCart={onAddToCart} />
+            </Box>
+          </Box>
+        </Box>
       ) : (
-        <div>"Cargando..."</div>
+        <CircularProgress />
       )}
-    </div>
+    </Box>
   );
 };
 

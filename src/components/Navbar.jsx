@@ -10,6 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { generalContext } from "./CartContext";
 import CartWidget from "./CartWidget";
 import Logo from "./Logo";
 
@@ -21,35 +22,43 @@ const pages = [
   { label: "Contact", link: "/contact" },
 ];
 
-const Navbars = () => {
+const Navbar = () => {
+  const { cart } = React.useContext(generalContext);
+  const [cant, setCant] = React.useState(0);
+  React.useEffect(() => {
+    setCant(cart.reduce((acc, item) => acc + item.quantity, 0));
+  }, [cart]);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
   return (
-    <AppBar sx={{ backgroundColor: "#4169e1" }} position="static">
+    <AppBar sx={{ backgroundColor: "#A0C3D2" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
+              fontFamily: "roboto",
               fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
+              letterSpacing: "1rem",
+              color: "#073763",
               textDecoration: "none",
+              marginLeft: 7,
             }}
           >
             TIENDA ASCENSO
@@ -57,6 +66,7 @@ const Navbars = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
+              sx={{ color: "#073763" }}
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -93,7 +103,6 @@ const Navbars = () => {
               ))}
             </Menu>
           </Box>
-
           <Typography
             variant="h5"
             noWrap
@@ -103,10 +112,10 @@ const Navbars = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "roboto",
               fontWeight: 700,
               letterSpacing: ".2rem",
-              color: "inherit",
+              color: "#f7f7f7",
               textDecoration: "none",
             }}
           >
@@ -118,7 +127,7 @@ const Navbars = () => {
                 key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  color: "#003865",
+                  color: "#f7f7f7",
                   my: 2,
                   display: "block",
                 }}
@@ -128,9 +137,8 @@ const Navbars = () => {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
-            <CartWidget />
+            <CartWidget quantity={cant} />
           </Box>
         </Toolbar>
       </Container>
@@ -138,4 +146,4 @@ const Navbars = () => {
   );
 };
 
-export default Navbars;
+export default Navbar;

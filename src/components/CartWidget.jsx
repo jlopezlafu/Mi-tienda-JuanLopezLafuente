@@ -1,19 +1,22 @@
+import React, { useContext } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Button } from "@mui/material";
+import { generalContext } from "../components/CartContext";
+import { Link } from "react-router-dom";
 
-// Son component
-const CartWidget = () => {
+const CartWidget = ({ quantity }) => {
   return (
     <div>
-      <Button
-        variant="outlinedSizeSmall"
-        color="primary"
-        fullWidth={false}
-        startIcon={<ShoppingCartOutlinedIcon />}
-      >
-        {" "}
-        0
-      </Button>
+      <Link to="/cart">
+        <Button
+          variant="outlinedSizeSmall"
+          sx={{ color: "#000" }}
+          /* fullWidth={false} */
+          startIcon={<ShoppingCartOutlinedIcon />}
+        >
+          {quantity}{" "}
+        </Button>
+      </Link>
     </div>
   );
 };

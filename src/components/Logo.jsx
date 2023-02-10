@@ -3,8 +3,8 @@ import "../assets/css/Navbar.css";
 
 const Logo = () => {
   return (
-    <button className="btn-logo">
-      <img className="logo" src={logo} alt="logo"></img>
+    <button className="logoBottom">
+      <img className="logo" src={logo} alt="ascenso logo"></img>
     </button>
   );
 };

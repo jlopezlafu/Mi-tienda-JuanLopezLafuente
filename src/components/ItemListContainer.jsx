@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = () => {
-  return (
-    <div className="ItemList-container">
-      <ItemList />
-    </div>
-  );
-};
+export default function ItemListContainer() {
+  const { idCategory } = useParams();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const db = getFirestore();
+    let myCollection;
 
-export default ItemListContainer;
+    if (idCategory === undefined) {
+      myCollection = collection(db, "products");
+    } else {
+      myCollection = query(
+        collection(db, "products"),
+        where("idCategory", "==", idCategory)
+      );
+    }
+    getDocs(myCollection).then((data) => {
+      const auxProducts = data.docs.map((product) => ({
+        ...product.data(),
+        id: product.id,
+      }));
+      setProducts(auxProducts);
+    });
+  }, [idCategory]);
+  return <ItemList products={products} />;
+}

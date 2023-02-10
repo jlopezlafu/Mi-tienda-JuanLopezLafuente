@@ -4,20 +4,15 @@ import "../assets/css/index.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const Item = ({ product }) => {
+const Items = ({ product }) => {
   return (
     <Box sx={{ backgroundColor: "#ffffff" }} className="contItem">
-      <img
-        style={{ height: "400px" }}
-        src={product.img}
-        alt="product.name"
-      ></img>
+      <img className="images" src={product.img} alt="product" />
       <Typography sx={{ color: "#0A2647" }} variant="h5">
         {product.title}
       </Typography>
-      <Typography sx={{ color: "#0A2647" }}>Stock: {product.stock}</Typography>
       <Typography sx={{ color: "#0A2647" }}>
-        Precio: {"Pesos " + product.price}
+        {"Pesos " + product.price}
       </Typography>
       <Box className="bottomDetail">
         <Link to={`/item/${product.id}`}>
@@ -43,13 +38,16 @@ const Item = ({ product }) => {
               }}
             >
               {" "}
-              DETALLES
+              🛒 COMPRAR
             </Typography>
           </Button>
         </Link>
       </Box>
+      <Typography sx={{ color: "#0A2647", marginTop: 5 }}>
+        ENVIO GRATIS
+      </Typography>
     </Box>
   );
 };
 
-export default Item;
+export default Items;

@@ -1,26 +1,100 @@
-import React, { useState } from "react";
+import { Button } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../assets/css/ItemCount.css";
+import { generalContext } from "../components/CartContext";
 
-export default function ItemCount({ ini, max, addItem }) {
-  const [count, setCount] = useState(ini);
-  function restar() {
-    if (count >= 2) {
-      setCount(count - 1);
-    }
-  }
+const ItemCount = ({ stock, initial, onAddToCart }) => {
+  const { whiteMode } = useContext(generalContext);
 
-  function sumar() {
-    if (count < max) {
+  const [count, setCount] = useState(parseInt(initial));
+  const add = () => {
+    if (count < stock) {
       setCount(count + 1);
     }
-  }
+  };
+  const substract = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  useEffect(() => {
+    setCount(parseInt(initial));
+  }, [initial]);
 
   return (
     <div>
-      <button onClick={restar}>-</button>
-      {count}
-      <button onClick={sumar}>+</button>
+      <Button
+        disabled={count <= 0}
+        sx={{ background: "#ddd", margin: 2, cursor: "pointer" }}
+        onClick={substract}
+      >
+        -
+      </Button>
+      <span>{count}</span>
+      <Button
+        disabled={count >= stock}
+        sx={{ background: "#ddd", margin: 2 }}
+        onClick={add}
+      >
+        +
+      </Button>
+      <Link sx={{ color: whiteMode ? "#0A2647" : "#ffffff" }}>
+        <Button
+          sx={{
+            backgroundColor: whiteMode ? "#0A2647" : "#ffffff",
+            borderRadius: 2,
+            color: whiteMode ? "#ffffff" : "#0A2647",
+            "&:hover": {
+              backgroundColor: "inherit",
+              color: "inherit",
+            },
+          }}
+          variant="contained"
+          onClick={() => {
+            onAddToCart(count);
+          }}
+        >
+          AGREGAR AL CARRITO
+        </Button>
+      </Link>
       <br />
-      <button onClick={() => addItem(count)}>AGREGAR</button>
+      <Link to="/" sx={{ color: whiteMode ? "#0A2647" : "#ffffff" }}>
+        <Button
+          sx={{
+            backgroundColor: whiteMode ? "#0A2647" : "#ffffff",
+            borderRadius: 2,
+            color: whiteMode ? "#ffffff" : "#0A2647",
+            "&:hover": {
+              backgroundColor: "inherit",
+              color: "inherit",
+            },
+          }}
+          variant="contained"
+        >
+          SEGUIR COMPRANDO
+        </Button>
+      </Link>
+      <Link to="/checkout" sx={{ color: whiteMode ? "#0A2647" : "#ffffff" }}>
+        <Button
+          sx={{
+            margin: 3,
+            backgroundColor: whiteMode ? "#0A2647" : "#ffffff",
+            borderRadius: 2,
+            color: whiteMode ? "#ffffff" : "#0A2647",
+            "&:hover": {
+              backgroundColor: "inherit",
+              color: "inherit",
+            },
+          }}
+          variant="contained"
+        >
+          TERMINAR COMPRA
+        </Button>
+      </Link>
     </div>
   );
-}
+};
+
+export default ItemCount;
