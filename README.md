@@ -1,3 +1,4 @@
+![messi-copa-del-mundo](https://user-images.githubusercontent.com/111100335/218004572-a989f85b-96eb-43fe-abe7-c38d612a3b15.gif)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +69,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Presentacion del proyecto
+
+Mi tienda esta armada para la compra de camisetas de futbol de equipos de divisiones menores de argentina.
+contiene una pag principal, y esta dividido en categorias segun la division en la que se encuentra el equipo.
+
+### Dependencias
+
+utilice las siguientes dependencias adicionales a react que estan a continuacion.
+@fontsource/roboto
+@mui/icons-material
+@mui/material
+boxicons
+firebase
+react-dom,
+react-router-dom
+sweetalert2,
+sweetalert2-react-content
